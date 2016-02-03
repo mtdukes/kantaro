@@ -1,0 +1,9 @@
+#Ignore these directories
+#Files in keys and data also ignored, but file structure maintained
+/test_files
+
+#ignore these files
+.DS_Store
+palette.png
+.keys
+*.pyc
