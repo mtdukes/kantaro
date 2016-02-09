@@ -24,7 +24,7 @@ def sendMail():
 	session.login('kantaro.wral', secret_keys[3])
 	headers = "\r\n".join(["from: " + 'kantaro.wral',
 		"subject: " + "Kantaro report for " + datetime.date.today().strftime('%m/%d/%Y'),
-		"to: " + 'tdukes@wral.com'+',mbinker@wral.com',
+		"to: " + 'tdukes@wral.com'+',mbinker@wral.com'+',vaguirre@wral.com',
 		"mime-version: 1.0",
 		"content-type: text/html"])
 
@@ -63,7 +63,7 @@ def sendMail():
 		ad_variables[3][0],ad_variables[3][1],ad_variables[3][2],
 		ad_variables[4][0],ad_variables[4][1],
 		)
-	session.sendmail('kantaro.wral', ['tdukes@wral.com','mbinker@wral.com'], content)
+	session.sendmail('kantaro.wral', ['tdukes@wral.com','mbinker@wral.com','vaguirre@wral.com'], content)
 
 	print 'Email sent...'
 
