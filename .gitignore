@@ -4,6 +4,7 @@
 
 #ignore these files
 .DS_Store
+boto.cfg
 palette.png
 .keys
 *.pyc

@@ -16,12 +16,11 @@ Of particular note this week:
 </ul>
 You can download my full findings here:
 <ul>
-<li><a href="http://mtduk.es">Totals by sponsor</a></li>
-<li><a href="http://mtduk.es">Totals by campaign</a></li>
-<li><a href="http://mtduk.es">Historical changes</a></li>
-<li><a href="http://mtduk.es">Largest changes</a></li>
+<li><a href="http://mtduk.es/data/sponsor_totals.csv">Totals by sponsor</a></li>
+<li><a href="http://mtduk.es/data/campaign_totals.csv">Totals by campaign</a></li>
+<li><a href="http://mtduk.es/data/historical_totals.csv">Historical changes</a></li>
 </ul>
-If you find I made an error, please alert <a href="mailto:tdukes@wral.com">Tyler Dukes</a> so he can fix me.
+If you find I made an error, please alert <a href="mailto:tdukes@wral.com">Tyler Dukes</a> so he can fix me. Please do not reply to this email, as I am incapabale of responding or feeling human emotions.
 <br /><br />
 -Love
 <br />

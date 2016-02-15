@@ -3,11 +3,13 @@ from ftplib import FTP
 import dateparser
 import datetime
 import os.path
+import boto3
 
 #global variables
 dates = []
 secret_keys = []
 data_dest = 'data/'
+s3 = boto3.resource('s3')
 
 #utility function for constructing a list of 
 #dates and filenames of CSVs in Kantar data
@@ -78,8 +80,9 @@ def get_campaign_totals(filename):
 	print "Campaign totals calculated..."
 
 	totals.to_csv(data_dest+'campaign_totals.csv')
+	s3.Object('mtduk.es', 'data/campaign_totals.csv').put(Body=open(data_dest+'campaign_totals.csv', 'rb'))
 
-	print "CSV saved to",data_dest+'campaign_totals.csv'
+	print "CSV saved to",data_dest+'campaign_totals.csv','and S3'
 
 def get_sponsor_totals(filename):
 	print 'Calculating sponsor totals...'
@@ -96,8 +99,9 @@ def get_sponsor_totals(filename):
 	print 'Sponsor totals calculated...'
 
 	totals.to_csv(data_dest+'sponsor_totals.csv')
+	s3.Object('mtduk.es', 'data/sponsor_totals.csv').put(Body=open(data_dest+'sponsor_totals.csv', 'rb'))
 
-	print "CSV saved to",data_dest+'sponsor_totals.csv'
+	print "CSV saved to",data_dest+'sponsor_totals.csv','and S3'
 
 #This is crazy messy. Can we refactor?
 def get_historical_totals(filename):
@@ -184,8 +188,9 @@ def get_historical_totals(filename):
 	print 'Historical totals calculated...'
 
 	history.to_csv(data_dest+'historical_totals.csv')
+	s3.Object('mtduk.es', 'data/historical_totals.csv').put(Body=open(data_dest+'historical_totals.csv', 'rb'))
 
-	print 'CSV saved to',data_dest+'historical_totals.csv'
+	print 'CSV saved to',data_dest+'historical_totals.csv','and S3'
 
 def getBiggestChanges():
 	print 'Calculating largest changes...'
@@ -282,11 +287,11 @@ def getBiggestChanges():
 
 	print 'Largest changes calculated...'
 
-	#write to file
+	#write to file (these don't need to be saved to S3)
 	biggest_changes.to_csv(data_dest+'biggest_changes.csv')
-	biggest_pct_changes.to_csv(data_dest+'biggest_pct_changes.csv')
-
 	print 'CSV saved to',data_dest+'biggest_changes.csv'
+
+	biggest_pct_changes.to_csv(data_dest+'biggest_pct_changes.csv')
 	print 'CSV saved to',data_dest+'biggest_pct_changes.csv'
 
 def nullRawChange(value_before,value_after):
@@ -320,6 +325,7 @@ def _getMondayDate(current_date):
     return current_date
 
 def main():
+	#s3 = boto3.resource('s3')
 	filename = access_kantar()
 	#add checks for existing calculations
 	if filename != None:
@@ -331,5 +337,6 @@ def main():
 		print 'No file to process'
 
 if __name__ == '__main__':
+
 	main()
 	print 'Done. Have a nice day.'

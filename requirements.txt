@@ -1,8 +1,14 @@
 agate==1.2.0
 Babel==2.2.0
+boto==2.39.0
+boto3==1.2.3
+botocore==1.3.26
 dateparser==0.3.2
+docutils==0.12
+futures==3.0.5
 isodate==0.5.4
 jdatetime==1.7.2
+jmespath==0.9.0
 oauthlib==1.0.3
 parsedatetime==1.5
 python-dateutil==2.4.2
