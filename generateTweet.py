@@ -7,14 +7,19 @@ import tweepy
 import os
 import string
 import subprocess
+import locale
 
 #establish keys as global variables
 secret_keys = []
 consumer_key = 'KixchowUQDXKrWBwqpuQyEtXW'
 access_token = '4851145943-CG7jPXvHhSfGSWgTBALJL55tjpvqS8On7jXZkgU'
-
-#ws params
-ws_api = 'https://wordsmith.automatedinsights.com/api/v0.1'
+template = ['{0} has spent ${1} on this "{2}" ad on {3} issues +{4}',
+'{0} has spent ${1} on this "{2}" ad +{4}']
+#hacky fix to solve unpredictable locale problems
+try:
+	locale.setlocale(locale.LC_ALL, 'en_US.utf8')
+except:
+	locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 #global vars
 tweet_status = ''
@@ -23,25 +28,14 @@ data_dest = 'data/'
 
 #Our main worker function
 def main():
-	tweet_status = generate_statement()
+	generate_tweet()
+	tweet_status = generate_tweet()
 	tweet(tweet_status)
 
-def generate_statement():
-	_get_secrets()
-	ws_key = secret_keys[7]
-	
-	post_url = ws_api + '/templates/ncpolads/tweet-sample/outputs?access_token=' + ws_key
-	headers = {'Content-Type': 'application/json'}
-
-	# get the data schema and use it to establish null dictionary
-	get_url = ws_api + '/projects/ncpolads?access_token=' + ws_key
-	r = requests.get(get_url)
-	data = {'data':{}}
-	for key in r.json()['data']['schema']:
-		data['data'][str(key)] = ''
-
+def generate_tweet():
 	campaign_totals = 'campaign_totals.csv'
-	#line counter (there has to be a better way to do this)
+
+	#Get the number of lines in the CSV
 	with open(data_dest + campaign_totals,'rU') as csv_input:
 		reader = csv.reader(csv_input)
 		row_count = sum(1 for line in reader)
@@ -55,25 +49,33 @@ def generate_statement():
 			csv_fields[i] = field
 			i+=1
 		j = 0
-		# select random line for POST data
+		# select random line
 		rand = random.randint(0, row_count-2)
 		while j < rand:
 			reader.next()
 			j += 1
 		# read in csv values and use schema to select columns
 		for row in reader:
-			for cell in row:
-				data['data'][csv_fields[row.index(cell)]] = cell
+			#for testing
+			#cleaning up title
+			group = row[2]
+			if ',' in group:
+				group = " ".join(group.split(", ")[::-1])
+
+			tw_temp = template[0]
+			if row[4] == '':
+				tw_temp = template[1]
+			no_spaces = 1
+			if '/NC' in row[0]:
+				no_spaces = 2
+			return tw_temp.format(
+				group.title(), #group
+				locale.format('%d',int(row[1]),grouping=True), #money
+				(row[0].split(" ",no_spaces)[-1]).title(), #ad name
+				row[4], #issue type, if it exists
+				row[6]
+				)
 			break
-	
-	try:
-		r = requests.post(post_url, headers=headers, json=data)
-		if r.status_code != 400:
-			return r.json()['data']['content']
-		else:
-			print 'Error: Returned Status Code 400, Bad Request'
-	except:
-		print 'There was an error. Sorry this was unhelpful.'
 
 def process_video(video_url):
 	#check if the gif exists already
@@ -118,26 +120,37 @@ def tweet(twitter_msg):
 
 	update = _shorten(update)
 
+	print update
 	print "Tweet length:",len(update)
-	print "Attempting to tweet: "
-	print update+'http://wral.com/15183674 #ncpol'
 
 	#attempt to update twitter with given status
 	#need options for cleaning up input and shortening when len(update) is > 140
 	#check length of tweet
-	#can't exceed 92 characters with GIFs/links etc
-	if len(update) > 92:
-		print "Tweet is too long. Attempting to shorten..."
-		update = _shorten(update)
-		print "Trying again: "
-		print update+'http://wral.com/15183674 #ncpol'
+	#with gif, link, hashtag = 85
+	#with gif, hashtag = 109
+	#with link, hashtag = 110
+	#with hashtag = 134
+	#need to add 'wral.com/15183674 ' to update below
+
 	try:
 		if gif_file != "error":
-			api.update_with_media(gif_file,update+'http://wral.com/15183674 #ncpol')
+			if len(update) <= 85:
+				update = update+'#ncpol'
+				#update = update+'wral.com/15183674 #ncpol'
+			elif len(update) <= 109:
+				update = update+'#ncpol'
+			api.update_with_media(gif_file,update)
+			print update
 			print 'Tweet sent with media at', time.asctime(time.localtime(time.time()))
 		else:
-			api.update_status(update+'http://wral.com/15183674 #ncpol')
-			print 'Tweet sent without media at', time.asctime(time.localtime(time.time()))
+			if len(update) <= 110:
+				update = update+'#ncpol'
+				#update = update+'wral.com/15183674 #ncpol'
+			elif len(update) <= 134:
+				update = update+'#ncpol'
+			api.update_status(update)
+			print update
+			print 'Tweet sent with media at', time.asctime(time.localtime(time.time()))
 	except tweepy.TweepError, e:
 		print 'Error sending tweet:', e[0][0]['message']
 		print 'Logged at', time.asctime(time.localtime(time.time()))
@@ -153,6 +166,7 @@ def _shorten(long_tweet):
 	short_tweet = long_tweet
 	short_tweet = string.replace(short_tweet," Pac "," ",1)
 	short_tweet = string.replace(short_tweet,"North Carolina","NC",1)
+	short_tweet = string.replace(short_tweet," Nc "," NC ",1)
 	short_tweet = string.replace(short_tweet,".","")
 	short_tweet = string.replace(short_tweet," Usa "," ")
 	short_tweet = string.replace(short_tweet,"National","Ntl")

@@ -12,7 +12,6 @@ secret_keys = []
 def main():
 	analyzeKantar.main()
 	sendMail()
-	#generateTweet.main()
 
 def sendMail():
 	_get_secrets()

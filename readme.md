@@ -65,7 +65,7 @@ python kantaro.py
 - [ ] Additional tweet functionality
 - [ ] Create alternative to Wordsmith API
 - [ ] Add "new on the scene" report to email and spreadsheet
-- [ ] Integrate boto/s3 so we can store and access CSVs
+- [X] Integrate boto/s3 so we can store and access CSVs
 - [ ] Add link generation to kantaro email to access CSVs
 - [ ] Fix N/As and blanks in some tweets from source data
 - [ ] Add check to see if something has already been tweeted.
