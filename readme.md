@@ -63,11 +63,11 @@ python kantaro.py
 - [ ] Add error checking for continuously checking for new Kantar file around release time
 - [ ] Use emails as external variables in kantaro.py
 - [ ] Additional tweet functionality
-- [ ] Create alternative to Wordsmith API
+- [X] Create alternative to Wordsmith API
 - [ ] Add "new on the scene" report to email and spreadsheet
 - [X] Integrate boto/s3 so we can store and access CSVs
-- [ ] Add link generation to kantaro email to access CSVs
-- [ ] Fix N/As and blanks in some tweets from source data
+- [X] Add link generation to kantaro email to access CSVs
+- [X] Fix N/As and blanks in some tweets from source data
 - [ ] Add check to see if something has already been tweeted.
 - [ ] Refactor. (\/) (°,,,°) (\/) Your code is bad and you should feel bad.
 
