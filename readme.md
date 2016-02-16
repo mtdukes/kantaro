@@ -69,6 +69,7 @@ python kantaro.py
 - [X] Add link generation to kantaro email to access CSVs
 - [X] Fix N/As and blanks in some tweets from source data
 - [ ] Add check to see if something has already been tweeted.
+- [ ] Add variation of tweets to include hashtag for each media market (idea from [Jim Blaine](https://twitter.com/JimBlaine/status/699726960172339200))
 - [ ] Refactor. (\/) (°,,,°) (\/) Your code is bad and you should feel bad.
 
 ## Running a cron job
