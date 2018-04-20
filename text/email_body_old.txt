@@ -1,0 +1,28 @@
+===THIS IS A TEST. I AM NOT YET FULLY SENTIENT===<br />
+Hello,
+<br />
+Kantar has uploaded its newest ad data, so I did a quick analysis of the data back to Sept. 1, 2015.
+<br /><br />
+Of particular note this week:
+<ul>
+<li>The largest percentage change week over week was <b>{0}</b> with a <b>{1} percent</b> bump</li>
+<li>The largest change week over week was <b>{2}</b> with a <b>${3}</b> increase</li>
+<li>The largest change month over month was <b>{4}</b> with a <b>${5}</b> increase</li>
+<li>The largest percentage change month over month was <b>{6}</b> with a <b>{7} percent</b> rise</li>
+<li>The largest change quarter over quarter was <b>{8}</b> with a <b>${9}</b> increase</li>
+<li>The largest percentage change quarter over quarter was <b>{10}</b> with a <b>{11} percent</b> bump</li>
+<li>The largest spend on a single ad to date was <b>{12}</b> with a total <b>${13}</b> on the <b>'{14}'</b> ad</li>
+<li>The biggest ad spender to date has been <b>{15}</b> with a total <b>${16}</b> in spending</li>
+</ul>
+You can download my full findings here:
+<ul>
+<li><a href="http://mtduk.es/data/sponsor_totals.csv">Totals by sponsor</a></li>
+<li><a href="http://mtduk.es/data/campaign_totals.csv">Totals by campaign</a></li>
+<li><a href="http://mtduk.es/data/historical_totals.csv">Historical changes</a></li>
+</ul>
+If you find I made an error, please alert <a href="mailto:tdukes@wral.com">Tyler Dukes</a> so he can fix me. Please do not reply to this email, as I am incapabale of responding or feeling human emotions.
+<br /><br />
+-Love
+<br />
+ Kantaro
+<br />===THIS IS A TEST. I AM NOT YET FULLY SENTIENT===

@@ -119,7 +119,8 @@ def get_historical_totals(filename):
 		)
 	week_totals = by_week.aggregate([
 		('sponsor_cost',agate.Sum('EST. COST')),
-		('count',agate.Length())
+		('count',agate.Count())
+		#('count',agate.Length())
 	])
 	week0 = week_totals.where(lambda row: row['week_period'] == '0')
 	week1 = week_totals.where(lambda row: row['week_period'] == '1')
@@ -131,7 +132,7 @@ def get_historical_totals(filename):
 		)
 	month_totals = by_month.aggregate([
 		('sponsor_cost',agate.Sum('EST. COST')),
-		('count',agate.Length())
+		('count',agate.Count())
 	])
 	month0 = month_totals.where(lambda row: row['month_period'] == '0')
 	month1 = month_totals.where(lambda row: row['month_period'] == '1')
@@ -143,7 +144,7 @@ def get_historical_totals(filename):
 		)
 	quarter_totals = by_quarter.aggregate([
 		('sponsor_cost',agate.Sum('EST. COST')),
-		('count',agate.Length())
+		('count',agate.Count())
 	])
 	quarter0 = quarter_totals.where(lambda row: row['quarter_period'] == '0')
 	quarter1 = quarter_totals.where(lambda row: row['quarter_period'] == '1')
@@ -280,8 +281,10 @@ def getBiggestChanges():
 		])
 
 	biggest_pct_changes = agate.Table([
-		(top_week_pct.rows[0]),(top_month_pct.rows[0]),
-		(top_quarter_pct.rows[0])
+		(top_week_pct.rows[0])
+		#don't include this until enough time has passed
+		#(top_week_pct.rows[0]),(top_month_pct.rows[0]),
+		#(top_quarter_pct.rows[0])
 		],['sponsor','amount','detail','change_type'
 		])
 

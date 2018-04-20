@@ -1,5 +1,5 @@
 #Ignore these directories
-#Files in keys and data also ignored, but file structure maintained
+#Files in img and data also ignored, but file structure maintained
 /test_files
 
 #ignore these files

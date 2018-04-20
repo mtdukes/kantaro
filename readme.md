@@ -39,13 +39,20 @@ All rolling date calculations are based on weeks (1,4 and 13) that run from Tues
 
 ## generateTweet.py
 
-Mostly an experiment to see if we can use Kantar data and Wordsmith from Automated Insights to generate narrative and tweets. Queries the Wordsmith API for text content using a random line of data from data/campaign_totals.csv, downloading the ad video and converting it into an abbreviated GIF file stored in /img/.
+Uses Kantar data to generate narrative and tweets. Grabs a random line of data from data/campaign_totals.csv, downloading the ad video and converting it into an abbreviated GIF file stored in /img/. The result is then piped to the @ncpolads Twitter account.
 
 Usage:
 
 ```
 python generateTweet.py
 ```
+
+## @ncpolads TODO
+- [ ] Update for Twitter's 280-character limit.
+- [ ] Add variation of tweets to include hashtag for each media market (idea from [Jim Blaine](https://twitter.com/JimBlaine/status/699726960172339200))
+- [ ] Can we link to FEC filings, if available? Link to PAC? (idea from [Kirk Ross](https://twitter.com/ludkmr/status/976482082716377089))
+- [ ] Make sure we note org/campaign running the ad, how much the buy, for what duration, and where (idea from [Jonathan Kappler](https://twitter.com/jonathankappler/status/976480518127702017))
+- [ ] Note how big buys are relative to other regional/national buys (idea from [Sean](https://twitter.com/RavenRavinoff/status/976476773243346944))
 
 ## kantaro.py
 
@@ -63,13 +70,11 @@ python kantaro.py
 - [ ] Add error checking for continuously checking for new Kantar file around release time
 - [ ] Use emails as external variables in kantaro.py
 - [ ] Additional tweet functionality
-- [X] Create alternative to Wordsmith API
 - [ ] Add "new on the scene" report to email and spreadsheet
 - [X] Integrate boto/s3 so we can store and access CSVs
 - [X] Add link generation to kantaro email to access CSVs
 - [X] Fix N/As and blanks in some tweets from source data
 - [ ] Add check to see if something has already been tweeted.
-- [ ] Add variation of tweets to include hashtag for each media market (idea from [Jim Blaine](https://twitter.com/JimBlaine/status/699726960172339200))
 - [ ] Refactor. (\/) (°,,,°) (\/) Your code is bad and you should feel bad.
 
 ## Running a cron job

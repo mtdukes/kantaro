@@ -26,12 +26,12 @@ def sendMail():
 	session.ehlo()
 	session.starttls()
 	session.login('kantaro.wral', secret_keys[3])
-	headers = "\r\n".join(["from: " + 'kantaro.wral',
-		"subject: " + "Kantaro report for " + datetime.date.today().strftime('%m/%d/%Y'),
-		#"to: " + 'tdukes@wral.com',
-		"to: " + 'tdukes@wral.com'+',mbinker@wral.com'+',vaguirre@wral.com',
-		"mime-version: 1.0",
-		"content-type: text/html"])
+	headers = '\r\n'.join(['from: ' + 'kantaro.wral',
+		'subject: ' + 'Kantaro report for ' + datetime.date.today().strftime('%m/%d/%Y'),
+		#'to: ' + 'tdukes@wral.com',
+		'to: ' + 'tdukes@wral.com'+',tfain@wral.com'+',lleslie@wral.com'+',dhendrickson@wral.com'+',mburns@wral.com',
+		'mime-version: 1.0',
+		'content-type: text/html'])
 
 	ad_variables = []
 	with open('data/biggest_changes.csv','rU') as csv_input:
@@ -62,13 +62,13 @@ def sendMail():
 		ad_variables[5][0],ad_variables[5][1],
 		ad_variables[0][0],ad_variables[0][1],
 		ad_variables[1][0],ad_variables[1][1],
-		ad_variables[6][0],ad_variables[6][1],
+		#ad_variables[6][0],ad_variables[6][1],
 		ad_variables[2][0],ad_variables[2][1],
-		ad_variables[7][0],ad_variables[7][1],
+		#ad_variables[7][0],ad_variables[7][1],
 		ad_variables[3][0],ad_variables[3][1],ad_variables[3][2],
 		ad_variables[4][0],ad_variables[4][1],
 		)
-	session.sendmail('kantaro.wral', ['tdukes@wral.com','mbinker@wral.com','vaguirre@wral.com'], content)
+	session.sendmail('kantaro.wral', ['tdukes@wral.com','tfain@wral.com','lleslie@wral.com','dhendrickson@wral.com','mburns@wral.com'], content)
 	#session.sendmail('kantaro.wral', ['tdukes@wral.com'], content)
 
 	print 'Email sent...'
