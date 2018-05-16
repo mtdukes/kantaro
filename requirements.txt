@@ -24,3 +24,4 @@ six==1.10.0
 tweepy==3.5.0
 umalqurra==0.2
 Unidecode==1.0.22
+argparse==1.4.0
