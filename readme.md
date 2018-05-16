@@ -15,6 +15,8 @@ pip install -r requirements.txt
 
 The generateTweet.py script also requires the use of [ffmpeg](https://www.ffmpeg.org/) to process video. A few ways to do it. [One way here](http://stackoverflow.com/questions/29125229/how-to-reinstall-ffmpeg-clean-on-ubuntu-14-04).
 
+gcc and python-devel is also required. 
+
 ## analyzeKantar.py
 
 Primary script for accessing and parsing data using agate. Takes no arguments.
